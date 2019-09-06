@@ -1,0 +1,10 @@
+name: DoomlikeDungeonsSpigot
+authors: [JaredBGreat,zhehe]
+main: me.zhehe.Main
+load: startup
+api-version: 1.13
+version: 0.1
+commands:
+  doomlikedungeonspigot:
+    aliases: [dld]
+    permission: dld.admin
