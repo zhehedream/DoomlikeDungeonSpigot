@@ -3,7 +3,7 @@ authors: [JaredBGreat,zhehe]
 main: me.zhehe.Main
 load: startup
 api-version: 1.13
-version: 0.1
+version: 0.2
 commands:
   doomlikedungeonspigot:
     aliases: [dld]

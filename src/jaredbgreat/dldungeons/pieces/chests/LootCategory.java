@@ -7,7 +7,7 @@ package jaredbgreat.dldungeons.pieces.chests;
  */	
 
 
-import com.gmail.nossr50.util.ItemUtils;
+//import com.gmail.nossr50.util.ItemUtils;
 import static jaredbgreat.dldungeons.pieces.chests.LootType.GEAR;
 import static jaredbgreat.dldungeons.pieces.chests.LootType.HEAL;
 import static jaredbgreat.dldungeons.pieces.chests.LootType.LOOT;
@@ -178,7 +178,8 @@ public class LootCategory {
 	 * @return
 	 */
 	private boolean isEnchantable(LootItem in) {
-		return ItemUtils.isEnchantable(new ItemStack(in.item, 1));
+//		return ItemUtils.isEnchantable(new ItemStack(in.item, 1));
+                return false;
 	}
 	
 	
