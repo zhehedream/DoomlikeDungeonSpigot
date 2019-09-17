@@ -16,6 +16,7 @@ import java.util.Random;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
 //import net.minecraft.enchantment.EnchantmentHelper;
 //import net.minecraft.init.Items;
@@ -127,12 +128,7 @@ public class LootCategory {
 		int enchPart =Math.min((5 + (diff * (diff + 1) / 2) * 5), diff * 10);
 		if(enchPart >= 1 && isEnchantable(item)) {
 			out = item.getStack(random);
-                        Enchantment randEnchant = Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
-                        try {
-                            out.addEnchantment(randEnchant, 1);
-                        } catch(IllegalArgumentException ex) {
-                            
-                        }
+//                        Enchantment randEnchant = Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
 //			out = EnchantmentHelper.addRandomEnchantment(random, out, enchPart, random.nextBoolean());
 		} else {
 			return enchantedLowerLevel(gear[Math.min(6, lootLevel)].getLoot(random), lootLevel, random);
@@ -154,15 +150,9 @@ public class LootCategory {
 		ItemStack out;
 		int diff = level - item.level;
 		if(isEnchantable(item) && (diff > random.nextInt(2))) {
-			int enchPart = Math.min((5 + (level * (level + 1) / 2) * 5), level * 10);
+//			int enchPart = Math.min((5 + (level * (level + 1) / 2) * 5), level * 10);
 			out = item.getStack(random);
-                        Enchantment randEnchant = Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
-                        try {
-                            out.addEnchantment(randEnchant, 1);
-                        } catch(IllegalArgumentException ex) {
-                            
-                        }
-//			out = EnchantmentHelper.addRandomEnchantment(random, out, enchPart, random.nextBoolean());
+//                        Enchantment randEnchant = Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
 		} else {
 			out = item.getStack(random);
 		}
@@ -178,8 +168,11 @@ public class LootCategory {
 	 * @return
 	 */
 	private boolean isEnchantable(LootItem in) {
-//		return ItemUtils.isEnchantable(new ItemStack(in.item, 1));
-                return false;
+////		return ItemUtils.isEnchantable(new ItemStack(in.item, 1));
+//                return false;
+            if(in.item == Material.ENCHANTED_BOOK) return true;
+            else return false;
+            // TODO: other equipments...
 	}
 	
 	
@@ -193,10 +186,10 @@ public class LootCategory {
 	private LootResult getEnchantedBook(int level, Random random) {
 		ItemStack out = new ItemStack(Material.ENCHANTED_BOOK, 1);
                 Enchantment randEnchant = Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
-                try {
-                    out.addEnchantment(randEnchant, 1);
-                } catch(IllegalArgumentException ex) {
-                            
+                if(out.getType() == Material.ENCHANTED_BOOK) {
+                    EnchantmentStorageMeta meta = (EnchantmentStorageMeta)out.getItemMeta();
+                    meta.addStoredEnchant(randEnchant, 1, true);
+                    out.setItemMeta(meta);
                 }
 //		out = EnchantmentHelper.addRandomEnchantment(random, out, Math.min(30, (int)(level * 7.5)), true);
 		return new LootResult(out, Math.min(level, 6));

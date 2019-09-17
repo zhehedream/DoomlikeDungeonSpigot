@@ -12,7 +12,6 @@ import java.util.Random;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 //import net.minecraft.item.ItemStack;
