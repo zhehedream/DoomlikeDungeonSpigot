@@ -46,6 +46,24 @@ public class Builder {
 //		MinecraftForge.TERRAIN_GEN_BUS.post(new DLDEvent.PlaceDungeonFinish(random, chunkX, chunkZ, world, dungeon));
 //		DoomlikeDungeons.profiler.endTask("Create Dungeons");
 	}
+        
+        public static boolean commandPlaceDungeon(Random random, int chunkX, int chunkZ, World world) throws Throwable {	
+//		if(world.isRemote) return; // Do not perform world-gen on the client!
+//		if (MinecraftForge.TERRAIN_GEN_BUS.post(new DLDEvent.PlaceDungeonBegin(random, chunkX, chunkZ, world))) return;
+//		DoomlikeDungeons.profiler.startTask("Create Dungeons");
+		Dungeon dungeon = new Dungeon(random, 
+								world.getBiome(chunkX * 16, chunkZ * 16), 
+								world, chunkX, chunkZ);
+                boolean res = (dungeon.theme != null);
+                
+		buildDungeon(dungeon);
+		dungeon.preFinalize();
+		dungeon = null;
+                
+                return res;
+//		MinecraftForge.TERRAIN_GEN_BUS.post(new DLDEvent.PlaceDungeonFinish(random, chunkX, chunkZ, world, dungeon));
+//		DoomlikeDungeons.profiler.endTask("Create Dungeons");
+	}
 		
 	
 	/**
